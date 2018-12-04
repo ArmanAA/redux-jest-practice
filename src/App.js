@@ -8,10 +8,31 @@ class App extends Component {
     return (
       <div className="App">
         <h1> Hello, World! </h1>
+        <button>Show Modal</button>
+        <button>Clear Modal</button>
+        <button>Populate Modal</button>
         <Posts />
       </div>
     );
   }
 }
 
-export default hot(module)(App);
+const mapStateToProps = state => {
+  return { posts: state.posts };
+};
+const mapDispatchToProps = {
+  // return {
+  // getPosts: posts =>
+  //   dispatch({
+  //     type: constants.GET_POSTS,
+  //     payload: posts
+  //   })
+  getPosts: posts => ({
+    type: constants.GET_POSTS,
+    payload: posts
+  })
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(hot(module)(App));
